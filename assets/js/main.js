@@ -38,6 +38,16 @@
   /* ---------- Year ---------- */
   $("#year").textContent = new Date().getFullYear();
 
+  /* ---------- Activation marquee (KOBIS standard) ---------- */
+  (function buildMarquees() {
+    const NOTE = "This website is built by KOBIS Berhad — Please Make the Activation Payment. Thank You.";
+    const unit = `<span><i class="sep">✦</i>${NOTE}</span>`;
+    const group = `<div class="marquee-group" aria-hidden="false">${unit.repeat(4)}</div>`;
+    // two identical groups => seamless -50% loop
+    const html = group + group.replace('aria-hidden="false"', 'aria-hidden="true"');
+    ["#mqTop", "#mqMid"].forEach((sel) => { const el = $(sel); if (el) el.innerHTML = html; });
+  })();
+
   /* ---------- Nav: scroll state ---------- */
   const nav = $("#nav");
   const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 20);
